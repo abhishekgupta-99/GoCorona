@@ -7,6 +7,10 @@
 
     <color name="blue_slider">#6CCAFF</color>
 
+    <color name="red_back">#FFCACA</color>
+    <color name="grey_text">#5F5F5F</color>
+    <color name="blue_light">#E4FAFF</color>
+
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
