@@ -7,6 +7,18 @@
 
     <color name="blue_slider">#6CCAFF</color>
 
+    <color name="red_back">#FFCACA</color>
+    <color name="grey_text">#5F5F5F</color>
+    <color name="blue_light">#E4FAFF</color>
+
+    <color name="red_donate_back">#FFCACA</color>
+    <color name="yellow_donate_back">#FFE589</color>
+    <color name="green_donate_back">#6DEAB5</color>
+
+    <color name="red_text">#B94739</color>
+    <color name="yellow_text">#DB9000</color>
+    <color name="green_text">#00824A</color>
+
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>

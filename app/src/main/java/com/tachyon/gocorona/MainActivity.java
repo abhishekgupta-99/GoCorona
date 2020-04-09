@@ -21,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.card.MaterialCardView;
+
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,5 +67,39 @@ public class MainActivity extends AppCompatActivity {
         i2.setImageResource(R.drawable.washing_hands1);
         i3.setImageResource(R.drawable.mobile_phone1);
         i4.setImageResource(R.drawable.asia);
+
+        TextView blood = findViewById(R.id.blood_text);
+        TextView money = findViewById(R.id.money_text);
+        TextView food = findViewById(R.id.food_text);
+
+        blood.setText("Blood");
+        money.setText("Money");
+        food.setText("Food");
+
+        blood.setTextColor(getResources().getColor(R.color.red_text));
+        money.setTextColor(getResources().getColor(R.color.yellow_text));
+        food.setTextColor(getResources().getColor(R.color.green_text));
+
+        ImageView blood_img = findViewById(R.id.blood_img);
+        ImageView money_img = findViewById(R.id.money_img);
+        ImageView food_img = findViewById(R.id.food_img);
+
+        blood_img.setImageResource(R.drawable.blood);
+        money_img.setImageResource(R.drawable.money);
+        food_img.setImageResource(R.drawable.food);
+
+        MaterialCardView blood_card = findViewById(R.id.donate_blood);
+        MaterialCardView money_card = findViewById(R.id.donate_money);
+        MaterialCardView food_card = findViewById(R.id.donate_food);
+
+        blood_card.setCardBackgroundColor(getResources().getColor(R.color.red_donate_back));
+        money_card.setCardBackgroundColor(getResources().getColor(R.color.yellow_donate_back));
+        food_card.setCardBackgroundColor(getResources().getColor(R.color.green_donate_back));
+    }
+
+    public void donate_money(View view) {
+
+        startActivity(new Intent(this,Donate_Amount.class));
+
     }
 }
