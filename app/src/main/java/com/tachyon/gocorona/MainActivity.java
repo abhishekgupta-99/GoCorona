@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,SymptomsActivity.class));
-                finish();
+                //finish();
             }
         });
 
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,DoDontActivity.class));
-                finish();
+                //finish();
             }
         });
 
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,HelplineActivity.class));
-                finish();
+                //finish();
             }
         });
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,GO_OUT.class));
-                finish();
+                //finish();
             }
         });
     }
@@ -138,9 +138,15 @@ public class MainActivity extends AppCompatActivity {
     public void donate_money(View view) {
 
         startActivity(new Intent(this,Donate_Amount.class));
-        finish();
+        //finish();
     }
 
     public void go_out(View view) {
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
