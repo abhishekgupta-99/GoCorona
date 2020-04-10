@@ -1,13 +1,21 @@
 package com.tachyon.gocorona;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
-import android.content.SharedPreferences;
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -15,6 +23,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,7 +41,6 @@ import androidmads.library.qrgenearator.QRGEncoder;
 import static android.view.View.GONE;
 
 public class GO_OUT extends AppCompatActivity {
-    SharedPreferences sh;
     EditText date,time,destination,destin_add;
     ChipGroup chipGroup;
 
@@ -40,21 +48,15 @@ public class GO_OUT extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go__out);
-
-        //Bundle bundle = getIntent().getExtras();
-
-        sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
-        String account_name=sh.getString("user_name","");
-
          time=findViewById(R.id.time);
          date=findViewById(R.id.date);
         destination =findViewById(R.id.dest);
         destin_add =findViewById(R.id.dest_add);
          chipGroup = findViewById(R.id.chip_group);
-        //Bundle bundle = getIntent().getExtras();
-        //String account_name=bundle.getString("user_name");
+//        Bundle bundle = getIntent().getExtras();
+//        String account_name=bundle.getString("user_name");
         TextView user=findViewById(R.id.signedIn);
-        user.setText(account_name);
+        user.setText("Abhishek Gupta");
         initialize_spinners_medical();
 
 chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
@@ -224,7 +226,7 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
     public void qrcode(View view) {
         if(check_validity())
         {
-            qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString());
+            qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Unverified");
         }
 
 
@@ -232,7 +234,7 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
 
     }
 
-    private void qr_code_generate(String dest, String dest_add, String date, String time) {
+    private void qr_code_generate(String dest, String dest_add, String date, String time,String status) {
 
         ImageView qrimg = findViewById(R.id.qrgenerate);
 
@@ -246,17 +248,39 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             int width = point.x;
             int height = point.y;
             int smallerDimension = width < height ? width : height;
-            smallerDimension = smallerDimension * (1/2);
+            smallerDimension = smallerDimension ;
 
 
             QRGEncoder qrgEncoder = new QRGEncoder(inputValue, null, QRGContents.Type.TEXT, smallerDimension);
-            qrgEncoder.setColorBlack(Color.BLACK);
-            qrgEncoder.setColorWhite(Color.WHITE);
+            //Unverified
+
+            ImageView status_=findViewById(R.id.verification_badge);
+
+            if(status.equals("Verified"))
+            {
+
+                status_.setVisibility(View.VISIBLE);
+
+                status_.setImageResource(R.drawable.correct);
+                qrgEncoder.setColorBlack(Color.BLUE);
+                qrgEncoder.setColorWhite(Color.WHITE);
+            }
+            else {
+
+                status_.setVisibility(View.VISIBLE);
+
+                status_.setImageResource(R.drawable.warning);
+                qrgEncoder.setColorBlack(Color.BLACK);
+                qrgEncoder.setColorWhite(Color.WHITE);
+            }
             try {
                 // Getting QR-Code as Bitmap
                 Bitmap bitmap = qrgEncoder.getBitmap();
                 // Setting Bitmap to ImageView
                 qrimg.setImageBitmap(bitmap);
+
+                Button verify=findViewById(R.id.verify);
+                verify.setVisibility(View.VISIBLE);
             } catch (Exception e) {
                 Log.v("QR ERROR", e.toString());
             }
@@ -276,6 +300,8 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
 return  true;
 
     }
+
+
 
     public void date(View view) {
 
@@ -323,6 +349,54 @@ return  true;
         timePickerDialog.show();
 
     }
+
+
+    public void verify(View view) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        String NOTIFICATION_CHANNEL_ID = "GO CORONA";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            @SuppressLint("WrongConstant") NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_MAX);
+            // Configure the notification channel.
+            notificationChannel.setDescription("Sample Channel description");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+            notificationChannel.enableVibration(true);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+        notificationBuilder.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setTicker("GO CORONA")
+                //.setPriority(Notification.PRIORITY_MAX)
+                .setContentTitle("QR Code Verified")
+                .setContentText("Your future visit to Nanavati has been verified by Dr. Paras")
+                .setContentInfo("Information");
+        notificationManager.notify(1, notificationBuilder.build());
+
+        qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Verified");
+    }
+
+//    public void verify(View view) {
+//
+//        NotificationCompat.Builder builder =
+//                new NotificationCompat.Builder(GO_OUT.this)
+//                        .setSmallIcon(R.drawable.woman)
+//                        .setContentTitle("Notifications Example")
+//                        .setContentText("This is a test notification");
+//
+//        Intent notificationIntent = new Intent(this, MainActivity.class);
+//        PendingIntent contentIntent = PendingIntent.getActivity(GO_OUT.this, 0, notificationIntent,
+//                PendingIntent.FLAG_UPDATE_CURRENT);
+//        builder.setContentIntent(contentIntent);
+//
+//        // Add as notification
+//        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        assert manager != null;
+//        manager.notify(0, builder.build());
+//    }
 }
 
 

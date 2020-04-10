@@ -142,4 +142,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this,Donate_Amount.class));
 
     }
+
+    public void go_out(View view) {
+    }
 }

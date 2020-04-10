@@ -13,10 +13,10 @@ public class History {
     private String day;
     @SerializedName("total")
     @Expose
-    private Total total;
+    private com.tachyon.gocorona.Models.Total total;
     @SerializedName("statewise")
     @Expose
-    private ArrayList<Statewise> statewise = null;
+    private ArrayList<com.tachyon.gocorona.Models.Statewise> statewise = null;
 
     public String getDay() {
         return day;
@@ -26,19 +26,19 @@ public class History {
         this.day = day;
     }
 
-    public Total getTotal() {
+    public com.tachyon.gocorona.Models.Total getTotal() {
         return total;
     }
 
-    public void setTotal(Total total) {
+    public void setTotal(com.tachyon.gocorona.Models.Total total) {
         this.total = total;
     }
 
-    public ArrayList<Statewise> getStatewise() {
+    public ArrayList<com.tachyon.gocorona.Models.Statewise> getStatewise() {
         return statewise;
     }
 
-    public void setStatewise(ArrayList<Statewise> statewise) {
+    public void setStatewise(ArrayList<com.tachyon.gocorona.Models.Statewise> statewise) {
         this.statewise = statewise;
     }
 

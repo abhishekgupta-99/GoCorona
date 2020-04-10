@@ -82,7 +82,7 @@
 <TextView
     android:layout_width="wrap_content"
     android:layout_margin="8dp"
-    android:text="You Last Visited Dmart, Andheri On Monday at 5 p.m \n Total Vists this week: 3"
+    android:text="You Last Visited Dmart, Andheri On Monday at 5 p.m \n Total Visits this week: 3"
     android:layout_gravity="center"
 
     android:layout_height="wrap_content">
@@ -184,7 +184,9 @@
                             android:inputType="text"
                             android:textColor="#000000"
                             android:textColorHint="#424242"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
+
+
 
 
                         <androidx.appcompat.widget.AppCompatEditText
@@ -192,12 +194,26 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="4dp"
-                            android:textSize="15sp"
+                            android:textSize="12sp"
                             android:layout_marginRight="4dp"
                             android:fontFamily="@font/poppins_regular"
                             android:hint="Visiting Address"
                             android:textColor="#000000"
                             android:textColorHint="#424242" />
+
+
+                        <AutoCompleteTextView
+                            android:id="@+id/dr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Consulting Doctor Name"
+                            android:inputType="text"
+                            android:textColor="#000000"
+                            android:textColorHint="#424242"
+                            android:textSize="12sp"/>
 
 
                         <androidx.appcompat.widget.AppCompatEditText
@@ -227,7 +243,7 @@
                             android:inputType="text"
                             android:textColor="#000000"
                             android:textColorHint="#424242"
-                            android:textSize="15sp" />
+                            android:textSize="12sp"/>
 
                     </LinearLayout>
 
@@ -258,6 +274,35 @@
                             android:fontFamily="@font/poppins_regular"
                             android:hint="Accompanies"
                             android:inputType="none" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/member_relation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:textSize="12sp"
+                                android:layout_gravity="start"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_regular"
+                                android:hint="Relationship"
+                                />
+                            <AutoCompleteTextView
+                                android:id="@+id/member_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:layout_weight="1"
+                                android:textSize="12sp"
+                                android:layout_gravity="end"
+                                android:gravity="end"
+                                android:fontFamily="@font/poppins_regular"
+                                android:hint="Member Name"
+                               />
+                        </LinearLayout>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -295,19 +340,65 @@
 
 
 
-
             </LinearLayout>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_below="@+id/book_details"
                 android:layout_centerInParent="true"
                 android:foregroundGravity="center"
                 android:id="@+id/qrgenerate"
-                android:src="@drawable/woman">
+               >
 
             </ImageView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/statuslayout"
+
+                android:gravity="center_horizontal"
+               android:layout_centerInParent="true"
+                android:layout_below="@+id/qrgenerate"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="gone"
+                    android:id="@+id/verification_badge"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/warning"
+                    />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Status"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppins"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/qrgenerate"
+
+                android:drawablePadding="2dp"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+            </LinearLayout>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@+id/statuslayout"
+                android:text="Get It Verified"
+                android:id="@+id/verify"
+                android:visibility="gone"
+                android:onClick="verify"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content">
+            </Button>
 
         </RelativeLayout>
 
