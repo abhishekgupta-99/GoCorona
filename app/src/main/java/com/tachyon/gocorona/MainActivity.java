@@ -103,4 +103,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void donate_money(View view) {
+
+        startActivity(new Intent(this,Donate_Amount.class));
+
+    }
 }

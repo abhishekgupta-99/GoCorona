@@ -15,6 +15,10 @@
         <activity android:name=".StatsActivity"></activity>
         <activity android:name=".HelplineActivity" />
         <activity android:name=".WelcomeActivity">
+        <activity android:name=".GO_OUT"></activity>
+        <!-- <activity android:name=".SignIn"></activity> -->
+        <activity android:name=".Donate_Amount" />
+        <activity android:name=".SignIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
