@@ -1,4 +1,4 @@
-package com.tachyon.gocorona.models;
+package com.tachyon.gocorona.Models;
 
 /**
  * Created by abhishek on 3/2020.

@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 import com.tachyon.gocorona.DonatePayment;
 import com.tachyon.gocorona.R;
-import com.tachyon.gocorona.models.Donate_ngo_model;
+import com.tachyon.gocorona.Models.Donate_ngo_model;
 
 import java.util.ArrayList;
 
@@ -78,7 +78,7 @@ public class Donate_Adapter extends RecyclerView.Adapter<Donate_Adapter.ViewHold
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_donate,viewGroup,false);
 
             ViewHolder viewHolder = new ViewHolder(v);
-            Toast.makeText(context, ngos.size()+"", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context, ngos.size()+"", Toast.LENGTH_SHORT).show();
             return viewHolder;
 
     }
@@ -89,7 +89,7 @@ public class Donate_Adapter extends RecyclerView.Adapter<Donate_Adapter.ViewHold
 
         final Donate_ngo_model ngo = ngos.get(i);
         holder.name.setText(ngo.name);
-        Toast.makeText(context, ngo.name, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, ngo.name, Toast.LENGTH_SHORT).show();
         if((ngo.description).length()>150)
         {
              short_desc=(ngo.description).substring(0,150)+"...Read More";
