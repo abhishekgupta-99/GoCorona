@@ -76,6 +76,7 @@
     <color name="gery_inactive">#e0e0e0</color>
     <color name="grey_back">#EEEEEE</color>
     <color name="dark_inactive">#BF212121</color>
+    <color name="dark_inactive2">#212121</color>
 
     <color name="default_inactive">#78909c</color>
 

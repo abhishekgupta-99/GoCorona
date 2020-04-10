@@ -1,5 +1,7 @@
-package com.tachyon.gocorona.adapters;
+package com.tachyon.gocorona.Adapters;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.button.MaterialButton;
+import com.tachyon.gocorona.DonatePayment;
 import com.tachyon.gocorona.R;
 import com.tachyon.gocorona.models.Donate_ngo_model;
 
@@ -44,14 +48,18 @@ public class Donate_Adapter extends RecyclerView.Adapter<Donate_Adapter.ViewHold
         public TextView name;
         public CardView web_card;
         public TextView description;
-        ItemLongClickListener itemLongClickListener;
+
+        MaterialButton read_more;
+        MaterialButton donate;
+        com.tachyon.gocorona.adapters.ItemLongClickListener itemLongClickListener;
 
         ViewHolder(View view) {
             super(view);
             name=view.findViewById(R.id.name);
             description=view.findViewById(R.id.desc);
             big_image_url=view.findViewById(R.id.ngo_image);
-
+            read_more = view.findViewById(R.id.read_more);
+            donate = view.findViewById(R.id.donate_btn);
 
         }
 
@@ -76,10 +84,10 @@ public class Donate_Adapter extends RecyclerView.Adapter<Donate_Adapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Donate_Adapter.ViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull final Donate_Adapter.ViewHolder holder, int i) {
         String short_desc;
 
-        Donate_ngo_model ngo = ngos.get(i);
+        final Donate_ngo_model ngo = ngos.get(i);
         holder.name.setText(ngo.name);
         Toast.makeText(context, ngo.name, Toast.LENGTH_SHORT).show();
         if((ngo.description).length()>150)
@@ -97,6 +105,17 @@ public class Donate_Adapter extends RecyclerView.Adapter<Donate_Adapter.ViewHold
 
 
         }
+
+        holder.donate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DonatePayment.class);
+                Bundle extras = new Bundle();
+                extras.putString("title",ngo.name);
+                extras.putString("desc",ngo.description);
+                context.startActivity(new Intent(context, DonatePayment.class));
+            }
+        });
     }
 
     @Override
