@@ -107,6 +107,20 @@ public class MainActivity extends AppCompatActivity {
         money_card.setCardBackgroundColor(getResources().getColor(R.color.yellow_donate_back));
         food_card.setCardBackgroundColor(getResources().getColor(R.color.green_donate_back));
 
+        v1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,SymptomsActivity.class));
+            }
+        });
+
+        v3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,HelplineActivity.class));
+            }
+        });
+
         v4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

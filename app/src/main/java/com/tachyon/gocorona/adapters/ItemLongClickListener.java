@@ -1,4 +1,4 @@
-package com.tachyon.gocorona.adapters;
+package com.tachyon.gocorona.Adapters;
 
 import android.view.View;
 

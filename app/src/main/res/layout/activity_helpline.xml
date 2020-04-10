@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HelplineActivity">
+    tools:context=".HelplineActivity"
+    android:fitsSystemWindows="true">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins"
-        android:letterSpacing="5"
         android:text="Helplines"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -21,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,7 +30,7 @@
         android:backgroundTint="@color/red_donate_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintTop_toBottomOf="@+id/help">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -45,6 +46,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="Central Helpline"
                 android:textColor="@color/black"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,6 +63,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <TextView
+                android:id="@+id/textView_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins"
+                android:text="Toll Free : "
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+
+            <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +84,7 @@
                 android:text="Email ID :"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView_17" />
 
             <ImageView
                 android:id="@+id/imageView17"
@@ -84,6 +98,17 @@
                 app:srcCompat="@drawable/circle" />
 
             <ImageView
+                android:id="@+id/imageView_17"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="16dp"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView_9"
+                app:srcCompat="@drawable/circle" />
+
+            <ImageView
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView17"
@@ -92,22 +117,44 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView17"
                 app:srcCompat="@drawable/ic_phone_black_24dp" />
 
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView_17"
+                app:layout_constraintEnd_toEndOf="@+id/imageView_17"
+                app:layout_constraintStart_toStartOf="@+id/imageView_17"
+                app:layout_constraintTop_toTopOf="@+id/imageView_17"
+                app:srcCompat="@drawable/ic_phone_black_24dp" />
+
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="TextView"
+                android:text="91-11-23978046"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/textView8"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
                 app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+            <TextView
+                android:id="@+id/textView_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="1075"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_8"
+                app:layout_constraintStart_toEndOf="@+id/textView_8"
+                app:layout_constraintTop_toTopOf="@+id/textView_8" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="TextView"
+                android:text="ncov2019@gov.in"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/textView11"
                 app:layout_constraintStart_toEndOf="@+id/textView11"
                 app:layout_constraintTop_toTopOf="@+id/textView11" />
@@ -136,5 +183,27 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/helpline_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="Helpline for States and Union Territories"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
