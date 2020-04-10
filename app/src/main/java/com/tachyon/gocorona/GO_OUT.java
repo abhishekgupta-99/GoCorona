@@ -1,12 +1,21 @@
 package com.tachyon.gocorona;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -217,7 +226,7 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
     public void qrcode(View view) {
         if(check_validity())
         {
-            qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString());
+            qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Unverified");
         }
 
 
@@ -225,7 +234,7 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
 
     }
 
-    private void qr_code_generate(String dest, String dest_add, String date, String time) {
+    private void qr_code_generate(String dest, String dest_add, String date, String time,String status) {
 
         ImageView qrimg = findViewById(R.id.qrgenerate);
 
@@ -245,8 +254,16 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             QRGEncoder qrgEncoder = new QRGEncoder(inputValue, null, QRGContents.Type.TEXT, smallerDimension);
             //Unverified
 
-            qrgEncoder.setColorBlack(Color.BLACK);
-            qrgEncoder.setColorWhite(Color.WHITE);
+            if(status.equals("Verified"))
+            {
+
+                qrgEncoder.setColorBlack(Color.BLUE);
+                qrgEncoder.setColorWhite(Color.WHITE);
+            }
+            else {
+                qrgEncoder.setColorBlack(Color.BLACK);
+                qrgEncoder.setColorWhite(Color.WHITE);
+            }
             try {
                 // Getting QR-Code as Bitmap
                 Bitmap bitmap = qrgEncoder.getBitmap();
@@ -274,6 +291,8 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
 return  true;
 
     }
+
+
 
     public void date(View view) {
 
@@ -321,6 +340,54 @@ return  true;
         timePickerDialog.show();
 
     }
+
+
+    public void verify(View view) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        String NOTIFICATION_CHANNEL_ID = "GO CORONA";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            @SuppressLint("WrongConstant") NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_MAX);
+            // Configure the notification channel.
+            notificationChannel.setDescription("Sample Channel description");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+            notificationChannel.enableVibration(true);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+        notificationBuilder.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setTicker("GO CORONA")
+                //.setPriority(Notification.PRIORITY_MAX)
+                .setContentTitle("QR Code Verified")
+                .setContentText("Your future visit to Nanavati has been verified by Dr. Paras")
+                .setContentInfo("Information");
+        notificationManager.notify(1, notificationBuilder.build());
+
+        qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Verified");
+    }
+
+//    public void verify(View view) {
+//
+//        NotificationCompat.Builder builder =
+//                new NotificationCompat.Builder(GO_OUT.this)
+//                        .setSmallIcon(R.drawable.woman)
+//                        .setContentTitle("Notifications Example")
+//                        .setContentText("This is a test notification");
+//
+//        Intent notificationIntent = new Intent(this, MainActivity.class);
+//        PendingIntent contentIntent = PendingIntent.getActivity(GO_OUT.this, 0, notificationIntent,
+//                PendingIntent.FLAG_UPDATE_CURRENT);
+//        builder.setContentIntent(contentIntent);
+//
+//        // Add as notification
+//        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        assert manager != null;
+//        manager.notify(0, builder.build());
+//    }
 }
 
 

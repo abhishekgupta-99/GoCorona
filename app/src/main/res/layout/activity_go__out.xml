@@ -305,7 +305,7 @@
                 android:layout_centerInParent="true"
                 android:foregroundGravity="center"
                 android:id="@+id/qrgenerate"
-                android:src="@drawable/woman">
+               >
 
             </ImageView>
 
