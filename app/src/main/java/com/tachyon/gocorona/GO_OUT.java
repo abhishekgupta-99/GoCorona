@@ -9,14 +9,17 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -43,7 +46,11 @@ import static android.view.View.GONE;
 public class GO_OUT extends AppCompatActivity {
     EditText date,time,destination,destin_add;
     ChipGroup chipGroup;
-
+    String chiptype;
+    private EditText consulting_Dr;
+    SharedPreferences sharedPreferences;
+    String account_name;
+    ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,17 +60,20 @@ public class GO_OUT extends AppCompatActivity {
         destination =findViewById(R.id.dest);
         destin_add =findViewById(R.id.dest_add);
          chipGroup = findViewById(R.id.chip_group);
+         progress = new ProgressDialog(this);
+         consulting_Dr=findViewById(R.id.dr);
 //        Bundle bundle = getIntent().getExtras();
-//        String account_name=bundle.getString("user_name");
+        sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        account_name=sharedPreferences.getString("user_name","Abhishek Gupta");
         TextView user=findViewById(R.id.signedIn);
-        user.setText("Abhishek Gupta");
+        user.setText(account_name);
         initialize_spinners_medical();
 
-chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
+       chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
     @Override
     public void onCheckedChanged(ChipGroup group, int checkedId) {
 
-        String chiptype = group.findViewById(checkedId).toString();
+         chiptype = group.findViewById(checkedId).toString();
         chiptype = chiptype.substring(chiptype.indexOf('/') + 1, chiptype.indexOf('}'));
 
 
@@ -98,6 +108,7 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
     private void initialize_spinners_volunteer() {
         destination.setHint("NGO to volunteer");
         destin_add.setHint("Donation Drive At");
+        consulting_Dr.setVisibility(GONE);
 
         String[] no = new String[] {"1", "2"};
         String[] hospitals=new String[] {"ASHA EK HOPE","Ujala","India Fights Back","Fighting Corona"};
@@ -138,9 +149,18 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
 
     }
 
+    Runnable progressRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            progress.cancel();
+        }
+    };
+
     private void initialize_spinners_groceries() {
         destination.setHint("Nearby Market");
         destin_add.setHint("Market Location");
+        consulting_Dr.setVisibility(GONE);
 
         String[] no = new String[] {"1", "2"};
         String[] hospitals=new String[] {"Dmart","Parth General Store","Dhruvi Suoer Market"};
@@ -184,6 +204,8 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
         destination.setHint("Nearby Hospital");
         destin_add.setHint("Hospital Location");
 
+        consulting_Dr.setVisibility(View.VISIBLE);
+
 
 
         String[] no = new String[] {"1", "2"};
@@ -204,11 +226,6 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
                         hospitals);
 
 
-//        ArrayAdapter<String> adapter_sub =
-//                new ArrayAdapter<>(
-//                        this,
-//                        R.layout.dropdown_menu_popup_item,
-//                        BookFragment.getSubject_names_clone());
 
         AutoCompleteTextView editTextFilledExposedDropdown1 =
                 findViewById(R.id.number_of_memb);
@@ -226,7 +243,14 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
     public void qrcode(View view) {
         if(check_validity())
         {
-            qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Unverified");
+
+
+
+
+            qr_code_generate(chiptype,destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Unverified","None");
+            progress.setTitle("Request");
+            progress.setMessage("Please wait while your request is being verified by the authorities");
+
         }
 
 
@@ -234,11 +258,11 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
 
     }
 
-    private void qr_code_generate(String dest, String dest_add, String date, String time,String status) {
+    private void qr_code_generate(String chip,String dest, String dest_add, String date, String time,String status, String VerifiedBy) {
 
         ImageView qrimg = findViewById(R.id.qrgenerate);
 
-        String inputValue="Visitor: \n"+"Reason: \n"+"Destination: \n"+dest+"Address: \n"+"On: \n"+date+"At: \n"+time;
+            String inputValue="Name: "+account_name+"\n"+"Reason: " +chip+"\n"+"Destination: "+dest+"\n"+"Location: "+dest_add+"\n"+"On:  "+date+" \n"+"At: "+time+" \n"+"Status: "+status +"\n"+"Verified By: "+VerifiedBy+" \n"+"Total Accompanies: 1 \n";
 
         if (inputValue.length() > 0) {
             WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -258,7 +282,8 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
 
             if(status.equals("Verified"))
             {
-
+                Handler pdCanceller = new Handler();
+                pdCanceller.postDelayed(progressRunnable, 5000);
                 status_.setVisibility(View.VISIBLE);
 
                 status_.setImageResource(R.drawable.correct);
@@ -281,6 +306,8 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
 
                 Button verify=findViewById(R.id.verify);
                 verify.setVisibility(View.VISIBLE);
+
+
             } catch (Exception e) {
                 Log.v("QR ERROR", e.toString());
             }
@@ -352,6 +379,8 @@ return  true;
 
 
     public void verify(View view) {
+
+        progress.show();
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID = "GO CORONA";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -372,11 +401,11 @@ return  true;
                 .setTicker("GO CORONA")
                 //.setPriority(Notification.PRIORITY_MAX)
                 .setContentTitle("QR Code Verified")
-                .setContentText("Your future visit to Nanavati has been verified by Dr. Paras")
+                .setContentText("Your travel pass to Nanavati has been verified by Dr. Paras")
                 .setContentInfo("Information");
         notificationManager.notify(1, notificationBuilder.build());
 
-        qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Verified");
+        qr_code_generate(chiptype,destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Verified","Dr. Paras");
     }
 
 //    public void verify(View view) {
