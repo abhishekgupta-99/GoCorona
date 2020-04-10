@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.tachyon.gocorona.Adapters.Donate_Adapter;
-import com.tachyon.gocorona.models.Donate_ngo_model;
+import com.tachyon.gocorona.Models.Donate_ngo_model;
 
 import java.util.ArrayList;
 import java.util.Objects;

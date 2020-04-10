@@ -76,7 +76,7 @@ public class SignIn extends AppCompatActivity {
         try {
             GoogleSignInAccount account = task.getResult(ApiException.class);
 
-            Toast.makeText(this, "Successful Sign In", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Successful Sign In", Toast.LENGTH_SHORT).show();
 
             Intent i=new Intent(this,WelcomeActivity.class);
             //i.putExtra("user_name",account.getDisplayName()+"");

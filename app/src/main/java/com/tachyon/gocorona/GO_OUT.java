@@ -320,7 +320,7 @@ public class GO_OUT extends AppCompatActivity {
 
         if (destination.getText().toString().isEmpty()|| destin_add.getText().toString().isEmpty() || date.getText().toString().isEmpty() || time.getText().toString().isEmpty() )
         {
-            Toast.makeText(this, "Fields Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Fields Cannot Be Empty", Toast.LENGTH_SHORT).show();
             return false;
         }
 
