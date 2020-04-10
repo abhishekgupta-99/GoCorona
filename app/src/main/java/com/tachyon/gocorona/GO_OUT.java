@@ -53,10 +53,10 @@ public class GO_OUT extends AppCompatActivity {
         destination =findViewById(R.id.dest);
         destin_add =findViewById(R.id.dest_add);
          chipGroup = findViewById(R.id.chip_group);
-        Bundle bundle = getIntent().getExtras();
-        String account_name=bundle.getString("user_name");
+//        Bundle bundle = getIntent().getExtras();
+//        String account_name=bundle.getString("user_name");
         TextView user=findViewById(R.id.signedIn);
-        user.setText(account_name);
+        user.setText("Abhishek Gupta");
         initialize_spinners_medical();
 
 chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
@@ -254,13 +254,22 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             QRGEncoder qrgEncoder = new QRGEncoder(inputValue, null, QRGContents.Type.TEXT, smallerDimension);
             //Unverified
 
+            ImageView status_=findViewById(R.id.verification_badge);
+
             if(status.equals("Verified"))
             {
 
+                status_.setVisibility(View.VISIBLE);
+
+                status_.setImageResource(R.drawable.correct);
                 qrgEncoder.setColorBlack(Color.BLUE);
                 qrgEncoder.setColorWhite(Color.WHITE);
             }
             else {
+
+                status_.setVisibility(View.VISIBLE);
+
+                status_.setImageResource(R.drawable.warning);
                 qrgEncoder.setColorBlack(Color.BLACK);
                 qrgEncoder.setColorWhite(Color.WHITE);
             }

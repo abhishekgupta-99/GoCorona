@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tachyon.gocorona">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <meta-data
         android:name="com.google.android.geo.API_KEY"
@@ -17,17 +19,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GO_OUT"></activity>
-        <!-- <activity android:name=".SignIn"></activity> -->
+        <activity android:name=".DonatePayment"></activity>
+        <activity android:name=".StatsActivity" />
+        <activity android:name=".HelplineActivity" />
+        <activity android:name=".WelcomeActivity" />
+        <activity android:name=".GO_OUT" /> <!-- <activity android:name=".SignIn"></activity> -->
         <activity android:name=".Donate_Amount" />
-        <activity android:name=".SignIn">
+        <activity android:name=".SignIn" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

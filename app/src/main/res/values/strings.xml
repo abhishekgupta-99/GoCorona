@@ -28,6 +28,16 @@ pandemic in India</string>
 have crossed paths with someone who
 has tested COVID-19 positive?</string>
 
+    <string name="test">Coronavirus Test</string>
+
+
+    <string name="state_name">Rajasthan</string>
+    <string name="todo">TODO</string>
+    <string name="confirmed"><b>Confirmed</b></string>
+    <string name="india">INDIA</string>
+    <string name="states_ut">STATES/UT:</string>
+    <string name="info_covid19_tracker">INFO COVID19 TRACKER</string>
+
 
     <!--    abhishek-->
     <string name="title_placeholder">Title</string>

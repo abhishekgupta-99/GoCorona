@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 import com.google.android.material.card.MaterialCardView;
 
 public class MainActivity extends AppCompatActivity {
+
+    SharedPreferences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+
+        sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        Boolean login = sh.getBoolean("Login",false);
+
+        if(!login)
+        {
+            startActivity(new Intent(MainActivity.this,SignIn.class));
         }
 
         setContentView(R.layout.activity_main);
@@ -95,11 +106,29 @@ public class MainActivity extends AppCompatActivity {
         blood_card.setCardBackgroundColor(getResources().getColor(R.color.red_donate_back));
         money_card.setCardBackgroundColor(getResources().getColor(R.color.yellow_donate_back));
         food_card.setCardBackgroundColor(getResources().getColor(R.color.green_donate_back));
+
+        v4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,StatsActivity.class));
+            }
+        });
+
+        MaterialCardView pass = findViewById(R.id.travel_pass);
+        pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,GO_OUT.class));
+            }
+        });
     }
 
     public void donate_money(View view) {
 
         startActivity(new Intent(this,Donate_Amount.class));
 
+    }
+
+    public void go_out(View view) {
     }
 }
