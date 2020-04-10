@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:text="Loren Epsum"
+                    android:text="Coronavirus Test"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -129,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                    android:text="You’ll answer a few questions about symptoms, travel, and contact you’ve had with others"
                     android:textColor="@color/grey_text" />
 
             </LinearLayout>
