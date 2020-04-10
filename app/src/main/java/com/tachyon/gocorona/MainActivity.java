@@ -26,10 +26,10 @@ import com.google.android.material.card.MaterialCardView;
 
 public class MainActivity extends AppCompatActivity {
 
-    SharedPreferences sh;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
@@ -38,21 +38,8 @@ public class MainActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
-        sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
-        Boolean login = sh.getBoolean("Login",false);
-
-        if(!login)
-        {
-            startActivity(new Intent(MainActivity.this,SignIn.class));
-        }
 
         setContentView(R.layout.activity_main);
-        PrefManager prefManager = new PrefManager(getApplicationContext());
-        if(prefManager.isFirstTimeLaunch()){
-            prefManager.setFirstTimeLaunch(false);
-            startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
-            finish();
-        }
 
         View v1 = findViewById(R.id.item1);
         View v2 = findViewById(R.id.item2);

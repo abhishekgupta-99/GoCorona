@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -30,6 +32,12 @@ public class SignIn extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         setContentView(R.layout.activity_sign_in);
 
 
@@ -70,7 +78,7 @@ public class SignIn extends AppCompatActivity {
 
             Toast.makeText(this, "Successful Sign In", Toast.LENGTH_SHORT).show();
 
-            Intent i=new Intent(this,MainActivity.class);
+            Intent i=new Intent(this,WelcomeActivity.class);
             //i.putExtra("user_name",account.getDisplayName()+"");
             myEdit.putString("user_name",account.getDisplayName()+"");
             myEdit.putBoolean("Login",true);
