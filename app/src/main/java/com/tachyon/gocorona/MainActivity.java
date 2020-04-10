@@ -114,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        TODO: do and dont top bar
+
         v3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
