@@ -42,6 +42,7 @@ public class WelcomeActivity extends AppCompatActivity {
         if(!login)
         {
             startActivity(new Intent(WelcomeActivity.this,SignIn.class));
+            finish();
         }
         else{
             // Checking for first time launch - before calling setContentView()

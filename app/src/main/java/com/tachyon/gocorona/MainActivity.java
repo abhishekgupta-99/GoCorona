@@ -98,14 +98,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,SymptomsActivity.class));
+                finish();
             }
         });
 
-//        TODO: do and dont top bar
         v2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,DoDontActivity.class));
+                finish();
             }
         });
 
@@ -113,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,HelplineActivity.class));
+                finish();
             }
         });
 
@@ -128,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,GO_OUT.class));
+                finish();
             }
         });
     }
@@ -135,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     public void donate_money(View view) {
 
         startActivity(new Intent(this,Donate_Amount.class));
-
+        finish();
     }
 
     public void go_out(View view) {
