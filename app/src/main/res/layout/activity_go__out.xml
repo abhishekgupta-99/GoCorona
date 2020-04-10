@@ -299,8 +299,8 @@
             </LinearLayout>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_below="@+id/book_details"
                 android:layout_centerInParent="true"
                 android:foregroundGravity="center"
@@ -308,6 +308,19 @@
                 android:src="@drawable/woman">
 
             </ImageView>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@+id/qrgenerate"
+                android:text="Get It Verified"
+                android:id="@+id/verify"
+                android:visibility="gone"
+                android:onClick="verify"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content">
+            </Button>
 
         </RelativeLayout>
 

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -238,10 +239,12 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             int width = point.x;
             int height = point.y;
             int smallerDimension = width < height ? width : height;
-            smallerDimension = smallerDimension * (1/2);
+            smallerDimension = smallerDimension ;
 
 
             QRGEncoder qrgEncoder = new QRGEncoder(inputValue, null, QRGContents.Type.TEXT, smallerDimension);
+            //Unverified
+
             qrgEncoder.setColorBlack(Color.BLACK);
             qrgEncoder.setColorWhite(Color.WHITE);
             try {
@@ -249,6 +252,9 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
                 Bitmap bitmap = qrgEncoder.getBitmap();
                 // Setting Bitmap to ImageView
                 qrimg.setImageBitmap(bitmap);
+
+                Button verify=findViewById(R.id.verify);
+                verify.setVisibility(View.VISIBLE);
             } catch (Exception e) {
                 Log.v("QR ERROR", e.toString());
             }
