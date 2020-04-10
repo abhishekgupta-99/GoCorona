@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -23,11 +24,17 @@ import java.util.Objects;
 public class SignIn extends AppCompatActivity {
 
     static final int RC_SIGN_IN = 321;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor myEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+
+        sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        myEdit = sharedPreferences.edit();
     }
 
 
@@ -63,8 +70,11 @@ public class SignIn extends AppCompatActivity {
 
             Toast.makeText(this, "Successful Sign In", Toast.LENGTH_SHORT).show();
 
-            Intent i=new Intent(this,GO_OUT.class);
-            i.putExtra("user_name",account.getDisplayName()+"");
+            Intent i=new Intent(this,MainActivity.class);
+            //i.putExtra("user_name",account.getDisplayName()+"");
+            myEdit.putString("user_name",account.getDisplayName()+"");
+            myEdit.putBoolean("Login",true);
+            myEdit.commit();
             startActivity(i);
 
         } catch (ApiException e) {

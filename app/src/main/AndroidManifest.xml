@@ -14,18 +14,19 @@
         android:theme="@style/AppTheme">
         <activity android:name=".StatsActivity"></activity>
         <activity android:name=".HelplineActivity" />
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".WelcomeActivity"/>
         <activity android:name=".GO_OUT"></activity>
         <!-- <activity android:name=".SignIn"></activity> -->
         <activity android:name=".Donate_Amount" />
-        <activity android:name=".SignIn">
+        <activity android:name=".SignIn"/>
+
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

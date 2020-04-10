@@ -101,7 +101,6 @@
 
     <color name="profileEditTextColor">#707070</color>
 
-    <color name="transparent">#00FFFFFF</color>
     <color name="purple">#9575CD</color>
     <color name="light">#757575</color>
     <color name="text_light">#424242</color>
@@ -116,7 +115,6 @@
     <color name="black_effective">#2a2a2a</color>
 
 
-    <color name="blue">#0179CA</color>
     <color name="grey300">#E0E0E0</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="card_stroke">#336D6D6D</color>
