@@ -51,8 +51,8 @@ public class GO_OUT extends AppCompatActivity {
         destination =findViewById(R.id.dest);
         destin_add =findViewById(R.id.dest_add);
          chipGroup = findViewById(R.id.chip_group);
-        Bundle bundle = getIntent().getExtras();
-        String account_name=bundle.getString("user_name");
+        //Bundle bundle = getIntent().getExtras();
+        //String account_name=bundle.getString("user_name");
         TextView user=findViewById(R.id.signedIn);
         user.setText(account_name);
         initialize_spinners_medical();
