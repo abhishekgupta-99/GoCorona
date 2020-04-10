@@ -3,11 +3,38 @@ package com.tachyon.gocorona;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Display;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.android.material.chip.ChipGroup;
+
+import java.util.Calendar;
+
+import androidmads.library.qrgenearator.QRGContents;
+import androidmads.library.qrgenearator.QRGEncoder;
+
+import static android.view.View.GONE;
 
 public class GO_OUT extends AppCompatActivity {
     SharedPreferences sh;
+    EditText date,time,destination,destin_add;
+    ChipGroup chipGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +46,283 @@ public class GO_OUT extends AppCompatActivity {
         sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         String account_name=sh.getString("user_name","");
 
+         time=findViewById(R.id.time);
+         date=findViewById(R.id.date);
+        destination =findViewById(R.id.dest);
+        destin_add =findViewById(R.id.dest_add);
+         chipGroup = findViewById(R.id.chip_group);
+        Bundle bundle = getIntent().getExtras();
+        String account_name=bundle.getString("user_name");
         TextView user=findViewById(R.id.signedIn);
         user.setText(account_name);
+        initialize_spinners_medical();
+
+chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(ChipGroup group, int checkedId) {
+
+        String chiptype = group.findViewById(checkedId).toString();
+        chiptype = chiptype.substring(chiptype.indexOf('/') + 1, chiptype.indexOf('}'));
+
+
+        switch (chiptype+"")
+        {
+            case "medical":
+
+                initialize_spinners_medical();
+
+                break;
+
+            case "groceries":
+                initialize_spinners_groceries();
+
+                break;
+            case "vol":
+                initialize_spinners_volunteer();
+
+                break;
+            default:
+
+                break;
+
+
+        }
+
+    }
+});
+
+    }
+
+    private void initialize_spinners_volunteer() {
+        destination.setHint("NGO to volunteer");
+        destin_add.setHint("Donation Drive At");
+
+        String[] no = new String[] {"1", "2"};
+        String[] hospitals=new String[] {"ASHA EK HOPE","Ujala","India Fights Back","Fighting Corona"};
+
+
+
+        ArrayAdapter<String> adapter_accompany =
+                new ArrayAdapter<String>(
+                        this,
+                        R.layout.dropdown_menu_popup_item,
+                        no);
+
+        ArrayAdapter<String> adapter_hospital =
+                new ArrayAdapter<String>(
+                        this,
+                        R.layout.dropdown_menu_popup_item,
+                        hospitals);
+
+
+//        ArrayAdapter<String> adapter_sub =
+//                new ArrayAdapter<>(
+//                        this,
+//                        R.layout.dropdown_menu_popup_item,
+//                        BookFragment.getSubject_names_clone());
+
+        AutoCompleteTextView editTextFilledExposedDropdown1 =
+                findViewById(R.id.number_of_memb);
+        editTextFilledExposedDropdown1.setAdapter(adapter_accompany);
+
+
+
+        AutoCompleteTextView editTextFilledExposedDropdown2 =
+                findViewById(R.id.dest);
+        editTextFilledExposedDropdown2.setAdapter(adapter_hospital);
+
+
+
+
+    }
+
+    private void initialize_spinners_groceries() {
+        destination.setHint("Nearby Market");
+        destin_add.setHint("Market Location");
+
+        String[] no = new String[] {"1", "2"};
+        String[] hospitals=new String[] {"Dmart","Parth General Store","Dhruvi Suoer Market"};
+
+
+
+        ArrayAdapter<String> adapter_accompany =
+                new ArrayAdapter<String>(
+                        this,
+                        R.layout.dropdown_menu_popup_item,
+                        no);
+
+        ArrayAdapter<String> adapter_hospital =
+                new ArrayAdapter<String>(
+                        this,
+                        R.layout.dropdown_menu_popup_item,
+                        hospitals);
+
+
+//        ArrayAdapter<String> adapter_sub =
+//                new ArrayAdapter<>(
+//                        this,
+//                        R.layout.dropdown_menu_popup_item,
+//                        BookFragment.getSubject_names_clone());
+
+        AutoCompleteTextView editTextFilledExposedDropdown1 =
+                findViewById(R.id.number_of_memb);
+        editTextFilledExposedDropdown1.setAdapter(adapter_accompany);
+
+
+
+        AutoCompleteTextView editTextFilledExposedDropdown2 =
+                findViewById(R.id.dest);
+        editTextFilledExposedDropdown2.setAdapter(adapter_hospital);
+
+    }
+
+
+    private void initialize_spinners_medical() {
+
+        destination.setHint("Nearby Hospital");
+        destin_add.setHint("Hospital Location");
+
+
+
+        String[] no = new String[] {"1", "2"};
+        String[] hospitals=new String[] {"Nanavati Hospital","Bombay Hospital & Medical Research Centre","Hinduja National Hospital","Hiranandani Hospital","Kalsubai Hospital"};
+
+
+
+        ArrayAdapter<String> adapter_accompany =
+                new ArrayAdapter<String>(
+                        this,
+                        R.layout.dropdown_menu_popup_item,
+                        no);
+
+        ArrayAdapter<String> adapter_hospital =
+                new ArrayAdapter<String>(
+                        this,
+                        R.layout.dropdown_menu_popup_item,
+                        hospitals);
+
+
+//        ArrayAdapter<String> adapter_sub =
+//                new ArrayAdapter<>(
+//                        this,
+//                        R.layout.dropdown_menu_popup_item,
+//                        BookFragment.getSubject_names_clone());
+
+        AutoCompleteTextView editTextFilledExposedDropdown1 =
+                findViewById(R.id.number_of_memb);
+        editTextFilledExposedDropdown1.setAdapter(adapter_accompany);
+
+
+
+        AutoCompleteTextView editTextFilledExposedDropdown2 =
+                findViewById(R.id.dest);
+        editTextFilledExposedDropdown2.setAdapter(adapter_hospital);
+
+
+    }
+
+    public void qrcode(View view) {
+        if(check_validity())
+        {
+            qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString());
+        }
+
+
+
+
+    }
+
+    private void qr_code_generate(String dest, String dest_add, String date, String time) {
+
+        ImageView qrimg = findViewById(R.id.qrgenerate);
+
+        String inputValue="Visitor: \n"+"Reason: \n"+"Destination: \n"+dest+"Address: \n"+"On: \n"+date+"At: \n"+time;
+
+        if (inputValue.length() > 0) {
+            WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
+            Display display = manager.getDefaultDisplay();
+            Point point = new Point();
+            display.getSize(point);
+            int width = point.x;
+            int height = point.y;
+            int smallerDimension = width < height ? width : height;
+            smallerDimension = smallerDimension * (1/2);
+
+
+            QRGEncoder qrgEncoder = new QRGEncoder(inputValue, null, QRGContents.Type.TEXT, smallerDimension);
+            qrgEncoder.setColorBlack(Color.BLACK);
+            qrgEncoder.setColorWhite(Color.WHITE);
+            try {
+                // Getting QR-Code as Bitmap
+                Bitmap bitmap = qrgEncoder.getBitmap();
+                // Setting Bitmap to ImageView
+                qrimg.setImageBitmap(bitmap);
+            } catch (Exception e) {
+                Log.v("QR ERROR", e.toString());
+            }
+        }
+
+
+    }
+
+    private boolean check_validity() {
+
+        if (destination.getText().toString().isEmpty()|| destin_add.getText().toString().isEmpty() || date.getText().toString().isEmpty() || time.getText().toString().isEmpty() )
+        {
+            Toast.makeText(this, "Fields Cannot Be Empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+return  true;
+
+    }
+
+    public void date(View view) {
+
+        date.setKeyListener(null);
+
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+    public void time(View view) {
+
+
+        time.setKeyListener(null);
+        final Calendar c = Calendar.getInstance();
+        int mHour = c.get(Calendar.HOUR_OF_DAY);
+        int mMinute = c.get(Calendar.MINUTE);
+
+        // Launch Time Picker Dialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                          int minute) {
+
+                        time.setText(hourOfDay + ":" + minute);
+                    }
+                }, mHour, mMinute, false);
+        timePickerDialog.show();
+
     }
 }
+
+

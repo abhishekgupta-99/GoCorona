@@ -34,6 +34,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+
+            android:id="@+id/detailsrl"
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -41,7 +43,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white">
+            >
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
@@ -77,7 +79,15 @@
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_margin="8dp"
+    android:text="You Last Visited Dmart, Andheri On Monday at 5 p.m \n Total Vists this week: 3"
+    android:layout_gravity="center"
 
+    android:layout_height="wrap_content">
+
+</TextView>
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,7 +103,7 @@
                         app:singleSelection="true">
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/book"
+                            android:id="@+id/medical"
                             style="@style/CustomChipChoice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -107,7 +117,7 @@
                             app:chipStrokeWidth="1dp" />
 
                         <com.google.android.material.chip.Chip
-                            android:id="@+id/ppt"
+                            android:id="@+id/groceries"
                             style="@style/CustomChipChoice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -154,30 +164,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp">
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="100dp"
-                        android:layout_height="150dp"
-                        app:cardBackgroundColor="@color/grey300"
-                        app:cardCornerRadius="8dp">
 
-
-                        <ImageView
-                            android:id="@+id/selected_book"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="fitXY" />
-
-                        <TextView
-                            android:id="@+id/browse"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:onClick="search"
-                            android:text="Browse image"
-                            android:textSize="12sp" />
-
-                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:gravity="center"
@@ -186,46 +173,72 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/title"
+                        <AutoCompleteTextView
+                            android:id="@+id/dest"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="4dp"
                             android:layout_marginRight="4dp"
                             android:fontFamily="@font/poppins_regular"
-                            android:hint="Title"
+                            android:hint="Doctor/Hospital Name"
                             android:inputType="text"
                             android:textColor="#000000"
                             android:textColorHint="#424242"
-                            android:textSize="24sp" />
+                            android:textSize="15sp" />
+
 
                         <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/ref_url"
+                            android:id="@+id/dest_add"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:textSize="15sp"
+                            android:layout_marginRight="4dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Visiting Address"
+                            android:textColor="#000000"
+                            android:textColorHint="#424242" />
+
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:editable="false"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Select Date"
+                            android:onClick="date"
+                            android:inputType="text"
+                            android:textColor="#000000"
+                            android:textColorHint="#424242"
+                            android:textSize="15sp"  />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/time"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="4dp"
                             android:layout_marginRight="4dp"
                             android:fontFamily="@font/poppins_regular"
-                            android:hint="Reference Url"
-                            android:inputType="textUri"
+                            android:hint="Select Time"
+                            android:onClick="time"
+                            android:inputType="text"
                             android:textColor="#000000"
-                            android:textColorHint="#424242" />
+                            android:textColorHint="#424242"
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/spinners"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="8dp"
@@ -237,44 +250,64 @@
                         app:boxCornerRadiusTopStart="5dp">
 
                         <AutoCompleteTextView
-                            android:id="@+id/filled_exposed_dropdown_year"
+                            android:id="@+id/number_of_memb"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:editable="false"
+                            android:textSize="15sp"
                             android:fontFamily="@font/poppins_regular"
-                            android:hint="Year"
+                            android:hint="Accompanies"
                             android:inputType="none" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
-                        app:boxCornerRadiusBottomEnd="5dp"
-                        app:boxCornerRadiusBottomStart="5dp"
-                        app:boxCornerRadiusTopEnd="5dp"
-                        app:boxCornerRadiusTopStart="5dp">
+<!--                    <com.google.android.material.textfield.TextInputLayout-->
+<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        app:boxCornerRadiusBottomEnd="5dp"-->
+<!--                        app:boxCornerRadiusBottomStart="5dp"-->
+<!--                        app:boxCornerRadiusTopEnd="5dp"-->
+<!--                        app:boxCornerRadiusTopStart="5dp">-->
 
-                        <AutoCompleteTextView
-                            android:id="@+id/filled_exposed_dropdown_sub"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:editable="false"
-                            android:fontFamily="@font/poppins_regular"
-                            android:hint="Subject"
-                            android:inputType="none" />
+<!--                        <AutoCompleteTextView-->
+<!--                            android:id="@+id/filled_exposed_dropdown_sub"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:editable="false"-->
+<!--                            android:fontFamily="@font/poppins_regular"-->
+<!--                            android:hint="Subject"-->
+<!--                            android:inputType="none" />-->
 
-                    </com.google.android.material.textfield.TextInputLayout>
+<!--                    </com.google.android.material.textfield.TextInputLayout>-->
 
-                </LinearLayout>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Generate QR"
+                        android:onClick="qrcode"
+                        android:layout_height="wrap_content">
+                    </Button>
+
 
 
 
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/book_details"
+                android:layout_centerInParent="true"
+                android:foregroundGravity="center"
+                android:id="@+id/qrgenerate"
+                android:src="@drawable/woman">
+
+            </ImageView>
 
         </RelativeLayout>
 
