@@ -226,7 +226,7 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
     public void qrcode(View view) {
         if(check_validity())
         {
-            qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Unverified");
+            qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Unverified","None");
         }
 
 
@@ -234,11 +234,11 @@ chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
 
     }
 
-    private void qr_code_generate(String dest, String dest_add, String date, String time,String status) {
+    private void qr_code_generate(String dest, String dest_add, String date, String time,String status, String VerifiedBy) {
 
         ImageView qrimg = findViewById(R.id.qrgenerate);
 
-        String inputValue="Visitor: \n"+"Reason: \n"+"Destination: \n"+dest+"Address: \n"+"On: \n"+date+"At: \n"+time;
+            String inputValue="Name: Abhishek \n"+"Reason: Medical\n"+"Destination: Nanavati Hospital\n"+dest+"Location: Vile Parle\n"+"On: 13 April \n"+"At: 10: \n"+"Status: "+status +"\n"+"Verified By: "+VerifiedBy+" \n"+"Total Accompanies: 1 \n";
 
         if (inputValue.length() > 0) {
             WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -376,7 +376,7 @@ return  true;
                 .setContentInfo("Information");
         notificationManager.notify(1, notificationBuilder.build());
 
-        qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Verified");
+        qr_code_generate(destination.getText().toString(),destin_add.getText().toString(),date.getText().toString(),time.getText().toString(),"Verified","Dr. Paras");
     }
 
 //    public void verify(View view) {

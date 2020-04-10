@@ -375,7 +375,7 @@
                 android:text="Status"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 android:fontFamily="@font/poppins"
                 android:layout_centerInParent="true"
                 android:layout_below="@+id/qrgenerate"

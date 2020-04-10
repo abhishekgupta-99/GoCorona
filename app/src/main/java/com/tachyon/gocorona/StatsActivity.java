@@ -37,7 +37,6 @@ import com.tachyon.gocorona.Models.Statewise;
 import com.tachyon.gocorona.Utils.Helper;
 import com.tachyon.gocorona.Utils.URLS;
 import com.tachyon.gocorona.Utils.VolleySingleton;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -108,10 +107,9 @@ public class StatsActivity extends AppCompatActivity implements StateAdapter.set
     private void setRecyclerView() {
         main_anim.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.VISIBLE);
-//        main_anim.setAnimation(AnimationUtils.loadAnimation(context, R.anim.up_bottom_transition_animation_d));
-        //scrollView.setAnimation(AnimationUtils.loadAnimation(context, R.anim.up_bottom_transition_animation_d));
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setHasFixedSize(true);
+
         ArrayList<States> statesList = statesArrayList;
         statesList.remove(0);
         stateAdapter = new StateAdapter(statesList, getApplicationContext(), this);
