@@ -29,8 +29,6 @@ The **Go Corona** is a mobile app developed by Tachyon TechLabs to provide peopl
 	<li>And the personnel who will maintain the lockdown , when encountered on the paths will scan this QR code and approve his movement  and if the person is not found with the  Qr code will face legal action.
 </li>
 	
-	
-</ul>
 ### Go Corona Feature: 
 <ul>
 	<li>Get updates about the worldwide coronavirus situation.</li>
