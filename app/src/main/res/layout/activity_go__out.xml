@@ -120,6 +120,20 @@
                             app:chipStrokeColor="@color/grey300"
                             app:chipStrokeWidth="1dp" />
 
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/vol"
+                            style="@style/CustomChipChoice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="3dp"
+                            android:checkable="true"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Volunteer"
+                            app:chipStrokeColor="@color/grey300"
+                            app:chipStrokeWidth="1dp" />
+
 
                     </com.google.android.material.chip.ChipGroup>
                 </HorizontalScrollView>
