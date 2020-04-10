@@ -29,10 +29,11 @@ The **Go Corona** is a mobile app developed by Tachyon TechLabs to provide peopl
 	<li>And the personnel who will maintain the lockdown , when encountered on the paths will scan this QR code and approve his movement  and if the person is not found with the  Qr code will face legal action.
 </li>
 	
-<li>Multilingual Support.
-</li>
 	
 <li>Due to lack of access to the registration license numbers and the database of registered officials for now in the development purpose ,we could not concretely authenticate a government employee, a doctor, a ngo as a verifier for the QR code. But in future development with permission and access to the databases , we could surely implement the verifier side app features.
+</li>
+
+<li>Future SCOPE: Multilingual Support. Fake news detection is crucial in this crisis and will be implemented where locals annd officials would upvote and downvote just like a polling system with the reliable sources and proofs attached.
 </li>
 	
 ### Go Corona Feature: 
