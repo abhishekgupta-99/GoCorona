@@ -243,11 +243,11 @@
         android:text="Donate"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout_symp1"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayout_symp1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -263,6 +263,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="2"
             app:cardCornerRadius="8dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -282,6 +283,7 @@
                     android:id="@+id/blood_img"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_gravity="center"
 
                     android:src="@drawable/blood" />
 
@@ -322,6 +324,7 @@
                 android:paddingBottom="8dp">
 
                 <ImageView
+                    android:layout_gravity="center"
                     android:id="@+id/money_img"
                     android:layout_width="50dp"
                     android:onClick="donate_money"
@@ -364,6 +367,7 @@
                 android:paddingBottom="8dp">
 
                 <ImageView
+                    android:layout_gravity="center"
                     android:id="@+id/food_img"
                     android:layout_width="50dp"
                     android:layout_height="50dp"

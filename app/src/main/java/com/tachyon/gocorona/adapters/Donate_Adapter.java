@@ -51,7 +51,7 @@ public class Donate_Adapter extends RecyclerView.Adapter<Donate_Adapter.ViewHold
 
         MaterialButton read_more;
         MaterialButton donate;
-        com.tachyon.gocorona.adapters.ItemLongClickListener itemLongClickListener;
+        ItemLongClickListener itemLongClickListener;
 
         ViewHolder(View view) {
             super(view);
@@ -113,7 +113,9 @@ public class Donate_Adapter extends RecyclerView.Adapter<Donate_Adapter.ViewHold
                 Bundle extras = new Bundle();
                 extras.putString("title",ngo.name);
                 extras.putString("desc",ngo.description);
-                context.startActivity(new Intent(context, DonatePayment.class));
+                intent.putExtras(extras);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
     }
