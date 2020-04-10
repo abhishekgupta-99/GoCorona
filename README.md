@@ -36,6 +36,12 @@ The **Go Corona** is a mobile app developed by Tachyon TechLabs to provide peopl
 <li>Travel Pass System</li>
 <br>
 <img src="https://github.com/Omkar17dalvi/Example/blob/master/images/pass.png" class="center" width="300" height="500">
+<li>QR Code Generated (Unverified by officials)</li>
+<br>
+<img src="https://github.com/pranjalpc99/GoCorona/blob/master/images/WhatsApp%20Image%202020-04-11%20at%2000.54.15.jpeg" class="center" width="300" height="500">
+<li>QR Code Generated (Verified)</li>
+<br>
+<img src="https://github.com/pranjalpc99/GoCorona/blob/master/images/WhatsApp%20Image%202020-04-11%20at%2000.54.08.jpeg" class="center" width="300" height="500">
 <li>Donation Camp System</li>
 <br>
 <img src="https://github.com/Omkar17dalvi/Example/blob/master/images/dono.png" class="center">
